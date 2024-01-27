@@ -40,6 +40,7 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("Welcome",
               style: TextStyle(
@@ -48,6 +49,7 @@ class _AuthScreenState extends State<AuthScreen> {
                ),
               ),
               ListTile(
+                tileColor: _auth == Auth.signup ? GlobalVariable.backgroundColor : GlobalVariable.greyBackgroundCOlor,
                 title:  const Text(
                   "Create Account",
                 style: TextStyle(
@@ -85,6 +87,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                 ),
                ListTile(
+                tileColor: _auth == Auth.signin?GlobalVariable.backgroundColor:GlobalVariable.greyBackgroundCOlor,
                 title:  const Text(
                   "Sign-In.",
                 style: TextStyle(
@@ -102,6 +105,23 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              if(_auth == Auth.signin)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariable.backgroundColor,
+                  child: Form(
+                    key: _signInFormKey,
+                    child:  Column(
+                      children: [
+                        CustomTextField(hintText: "Email",controller: _emailcontroller),
+                        const SizedBox(height: 10,),
+                        CustomTextField(hintText: "Password",controller: _passwordcontroller),
+                        const SizedBox(height: 10,),
+                        CustomButton(text: "Sign In",onTap: (){},)
+                      ],
+                    ),
+                    ),
+                ),
             ],
           ),
         ),
