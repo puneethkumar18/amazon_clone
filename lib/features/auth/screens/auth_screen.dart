@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:flutter/material.dart';
 
 enum Auth{
@@ -20,10 +21,14 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+  final AuthServices authServices = AuthServices();
 
   final  _emailcontroller = TextEditingController();
   final _passwordcontroller =TextEditingController();
   final _namecontroller = TextEditingController();
+
+
+
 
 @override
   void dispose() {
@@ -31,6 +36,15 @@ class _AuthScreenState extends State<AuthScreen> {
     _namecontroller.dispose();
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
+  }
+
+  void signUpUser(){
+    authServices.signUpUser(
+      name: _namecontroller.text, 
+      email: _emailcontroller.text, 
+      password: _passwordcontroller.text, 
+      context: context
+      );
   }
   @override
   Widget build(BuildContext context) {
@@ -75,13 +89,29 @@ class _AuthScreenState extends State<AuthScreen> {
                     key: _signUpFormKey,
                     child:  Column(
                       children: [
-                        CustomTextField(hintText: "Email",controller: _emailcontroller),
+                        CustomTextField(
+                          hintText: "Email",
+                          controller: _emailcontroller
+                          ),
                         const SizedBox(height: 10,),
-                        CustomTextField(hintText: "Name",controller: _namecontroller),
+                        CustomTextField(
+                          hintText: "Name",
+                          controller: _namecontroller
+                          ),
                         const SizedBox(height: 10,),
-                        CustomTextField(hintText: "Password",controller: _passwordcontroller),
+                        CustomTextField(
+                          hintText: "Password",
+                          controller: _passwordcontroller
+                          ),
                         const SizedBox(height: 10,),
-                        CustomButton(text: "Sign Up",onTap: (){},)
+                        CustomButton(
+                          text: "Sign Up",
+                          onTap: (){
+                            if(_signUpFormKey.currentState!.validate()){
+                              signUpUser();
+                            }
+                          },
+                          ),
                       ],
                     ),
                     ),
@@ -92,8 +122,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   "Sign-In.",
                 style: TextStyle(
                   fontWeight: 
-                  FontWeight.bold),
+                  FontWeight.bold
                   ),
+                ),
                 leading: Radio(
                   activeColor: GlobalVariable.secondaryColor,
                   value: Auth.signin, 
@@ -113,11 +144,20 @@ class _AuthScreenState extends State<AuthScreen> {
                     key: _signInFormKey,
                     child:  Column(
                       children: [
-                        CustomTextField(hintText: "Email",controller: _emailcontroller),
+                        CustomTextField(
+                          hintText: "Email",
+                          controller: _emailcontroller
+                          ),
                         const SizedBox(height: 10,),
-                        CustomTextField(hintText: "Password",controller: _passwordcontroller),
+                        CustomTextField(
+                          hintText: "Password",
+                          controller: _passwordcontroller
+                          ),
                         const SizedBox(height: 10,),
-                        CustomButton(text: "Sign In",onTap: (){},)
+                        CustomButton(
+                          text: "Sign In",
+                          onTap: (){},
+                          ),
                       ],
                     ),
                     ),
