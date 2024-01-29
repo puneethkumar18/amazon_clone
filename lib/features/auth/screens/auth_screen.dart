@@ -46,6 +46,14 @@ class _AuthScreenState extends State<AuthScreen> {
       context: context
       );
   }
+
+  void signInUser(){
+    authServices.signInUser(
+      email: _emailcontroller.text, 
+      password: _passwordcontroller.text, 
+      context: context
+      );
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -117,7 +125,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                 ),
                ListTile(
-                tileColor: _auth == Auth.signin?GlobalVariable.backgroundColor:GlobalVariable.greyBackgroundCOlor,
+                tileColor: _auth == Auth.signin?
+                GlobalVariable.backgroundColor
+                :GlobalVariable.greyBackgroundCOlor,
                 title:  const Text(
                   "Sign-In.",
                 style: TextStyle(
@@ -156,7 +166,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         const SizedBox(height: 10,),
                         CustomButton(
                           text: "Sign In",
-                          onTap: (){},
+                          onTap:  (){
+                            if(_signInFormKey.currentState!.validate()){
+                              signInUser();
+                            }
+                          },
                           ),
                       ],
                     ),

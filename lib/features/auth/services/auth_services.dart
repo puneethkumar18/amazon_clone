@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/constants/utils.dart';
@@ -36,6 +38,34 @@ class AuthServices{
         context: context, 
         onSuccess: (){
           showSnackBar(context, "Account created! login with same creditials");
+        });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  void signInUser({
+    required String email,
+    required String password,
+    required BuildContext context,
+  })async{
+    try {
+     
+      http.Response res =  await http.post
+      (Uri.parse("$uri/api/signin"),
+      body: jsonEncode({
+        'email':email,
+        'password':password,
+      }),
+      headers: <String,String>{
+        'Content_Type':'application/json; charset= UTF-8',
+      },
+      );
+      httpErrorHandle(
+        response: res, 
+        context: context, 
+        onSuccess: (){
+          
         });
     } catch (e) {
       showSnackBar(context, e.toString());
