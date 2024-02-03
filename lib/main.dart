@@ -1,8 +1,8 @@
 
+import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
-import 'package:amazon_clone/features/home/screens/home_screens.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
@@ -55,11 +55,13 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty ?
-      const Scaffold(
-        body: HomeScreen(),
-      ): 
-      const AuthScreen(),
+       home: const Scaffold(
+        body: BottomBar(),
+       )//Provider.of<UserProvider>(context).user.token.isNotEmpty ?
+      // const Scaffold(
+      //   body: BottomBar(),
+      // ): 
+      // const AuthScreen(),
     );
   }
 }
