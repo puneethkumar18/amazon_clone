@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/account/screens/account_screen.dart';
 import 'package:amazon_clone/features/home/screens/home_screens.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +21,7 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> list = [
     const HomeScreen(),
-    const Scaffold(
-      body: Center(child: Text("Account")),
-    ),
+    const AccountScreen(),
     const Scaffold(
       body: Center(child: Text("Cart")),
     )
