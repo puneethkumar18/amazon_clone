@@ -1,7 +1,5 @@
 import 'package:amazon_clone/constants/global_variable.dart';
-import 'package:amazon_clone/providers/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class BelowAppBar extends StatelessWidget {
   const BelowAppBar({super.key});
