@@ -1,6 +1,6 @@
 
-import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
@@ -11,11 +11,11 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
+
         create: (context) => UserProvider(),
-        )],
-    child: const MyApp(),
-    )
-  );
+        ),
+      ]
+      ,child: const MyApp()));
   }
 
 class MyApp extends StatefulWidget {
@@ -27,19 +27,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AuthServices authServices = AuthServices();
+  final _messangerKey = GlobalKey<ScaffoldMessengerState>();
   @override
   void initState() {
     super.initState();
     authServices.getUserData(context: context);
   }
-  @override
-  void dispose() {
-    super.dispose();
-  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    scaffoldMessengerKey: _messangerKey,
       title: 'Amazon Clone',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariable.backgroundColor,
@@ -52,15 +50,15 @@ class _MyAppState extends State<MyApp> {
             color: Colors.black
             ),
         ),
+        useMaterial3: false,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-       home: const Scaffold(
-        body: BottomBar(),
-       )//Provider.of<UserProvider>(context).user.token.isNotEmpty ?
-      // const Scaffold(
-      //   body: BottomBar(),
-      // ): 
+      //  home: Provider.of<UserProvider>(context).user.token.isNotEmpty ?
+      //   Provider.of<UserProvider>(context).user.type == 'user'? 
+      //   const BottomBar()
+      //   :const AdminScreen():
       // const AuthScreen(),
+      home:const  AdminScreen(),
     );
   }
 }

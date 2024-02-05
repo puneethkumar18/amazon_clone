@@ -19,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarBorderWidth = 5;
 
 
-  List<Widget> list = [
+  List<Widget> list1 = [
     const HomeScreen(),
     const AccountScreen(),
     const Scaffold(
@@ -35,7 +35,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        body: list[_page],
+        body: list1[_page],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _page,
           selectedItemColor:GlobalVariable.selectedNavBarColor,

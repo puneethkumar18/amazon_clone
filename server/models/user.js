@@ -24,7 +24,7 @@ const userScheme = mongoose.Schema({
     },
     address:{
         type:String,
-        deafault:"",
+        deafault:"puneeth",
     },
     type:{
         type:String,
