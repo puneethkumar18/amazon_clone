@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-
 class Product {
   final String name;
   final String description;
@@ -9,6 +7,8 @@ class Product {
   final double quantity;
   final String category;
   final List<String> images;
+  final String? id;
+  final String? userId;
   Product({
     required this.name,
     required this.description,
@@ -16,6 +16,8 @@ class Product {
     required this.quantity,
     required this.category,
     required this.images,
+    this.id,
+    this.userId,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,12 @@ class Product {
     result.addAll({'quantity': quantity});
     result.addAll({'category': category});
     result.addAll({'images': images});
+    if(id != null){
+      result.addAll({'id': id});
+    }
+    if(userId != null){
+      result.addAll({'userId': userId});
+    }
   
     return result;
   }
@@ -39,6 +47,8 @@ class Product {
       quantity: map['quantity']?.toDouble() ?? 0.0,
       category: map['category'] ?? '',
       images: List<String>.from(map['images']),
+      id: map['_id'],
+      userId: map['userId'],
     );
   }
 

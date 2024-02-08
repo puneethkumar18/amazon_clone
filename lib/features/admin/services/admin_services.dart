@@ -67,7 +67,7 @@ class AdminServices {
 
   //get all products
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
-    final user = Provider.of<UserProvider>(context,listen: false).user;
+    final user = Provider.of<UserProvider>(context, listen: false).user;
     List<Product> productList = [];
     try {
       http.Response res = await http.get(
@@ -96,5 +96,32 @@ class AdminServices {
       showSnackBar(context, e.toString());
     }
     return productList;
+  }
+
+  void deleteProduct({
+    required BuildContext context,
+    required Product product,
+    required VoidCallback onSuccess,
+  }) async {
+    final user = Provider.of<UserProvider>(context).user;
+    try {
+      http.Response response = await http.post(
+          Uri.parse('$uri/admin/delete-product'),
+          body: jsonEncode({'id': product.id}),
+          headers: {
+            'Content_Type': 'application/json; charset= UTF-8',
+            'x-auth-token': user.token,
+          });
+
+      httpErrorHandle(
+        response: response,
+        context: context,
+        onSuccess: (){
+          onSuccess();
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }
