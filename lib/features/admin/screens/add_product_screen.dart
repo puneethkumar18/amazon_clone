@@ -4,6 +4,8 @@ import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/services/admin_services.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -17,10 +19,11 @@ class AddProductScreen extends StatefulWidget {
 
 class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController _productNamecontroller = TextEditingController();
-  final TextEditingController _descriptionNamecontroller =
-      TextEditingController();
-  final TextEditingController _priceNamecontroller = TextEditingController();
+  final TextEditingController _descriptionNamecontroller =TextEditingController();
+  final TextEditingController _pricecontroller = TextEditingController();
   final TextEditingController _quantityNamecontroller = TextEditingController();
+  final AdminServices _adminServices = AdminServices();
+  final _addProductFormKey  = GlobalKey<FormState>();
 
   String category = 'Mobiles';
 
@@ -34,7 +37,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Fashion',
   ];
 
-  void selectImages()async{
+  void sellProduct(){
+   if(_addProductFormKey.currentState!.validate()){
+        _adminServices.sellProduct(
+        context: context,
+        name: _productNamecontroller.text,
+        description: _descriptionNamecontroller.text,
+        price: double.parse(_pricecontroller.text),
+        quantity: double.parse(_quantityNamecontroller.text),
+        category: category,
+        images: selectedImages,
+      );
+   }
+  }
+
+  void selectImages() async {
     var res = await pickImages();
     setState(() {
       selectedImages = res;
@@ -45,7 +62,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void dispose() {
     super.dispose();
     _descriptionNamecontroller.dispose();
-    _priceNamecontroller.dispose();
+    _pricecontroller.dispose();
     _productNamecontroller.dispose();
     _quantityNamecontroller.dispose();
   }
@@ -68,46 +85,63 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10).copyWith(top: 10),
             child: Column(
               children: [
-                GestureDetector(
-                  onTap: selectImages,
-                  child: DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(10),
-                    dashPattern: const [10, 4],
-                    strokeCap: StrokeCap.round,
-                    child: Container(
-                      height: 150,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.folder_open,
-                            size: 40,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            "Select products from images",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey.shade400,
+                selectedImages.isNotEmpty
+                    ? CarouselSlider(
+                        items: selectedImages.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) => Image.file(
+                              i,
+                              fit: BoxFit.cover,
+                              height: 200,
+                            ),
+                          );
+                        }).toList(),
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          height: 200,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: selectImages,
+                        child: DottedBorder(
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(10),
+                          dashPattern: const [10, 4],
+                          strokeCap: StrokeCap.round,
+                          child: Container(
+                            height: 150,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.folder_open,
+                                  size: 40,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Select products from images",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey.shade400,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -127,7 +161,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   height: 10,
                 ),
                 CustomTextField(
-                  controller: _priceNamecontroller,
+                  controller: _pricecontroller,
                   hintText: "Price",
                 ),
                 const SizedBox(
@@ -161,7 +195,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomButton(
                   text: "Sell",
-                  onTap: () {},
+                  onTap: sellProduct,
                 ),
               ],
             ),

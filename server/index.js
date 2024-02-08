@@ -1,5 +1,6 @@
 const express = require("express");
 const http  = require("http");
+const adminRouter = require('./routes/admin');
 const authRouter  = require('./routes/auth');
 const mongoose = require("mongoose");
 
@@ -10,6 +11,7 @@ const DB = "mongodb+srv://puneeth:puni123@cluster0.imdw0te.mongodb.net/?retryWri
 
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 mongoose
 .connect(DB)
