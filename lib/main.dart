@@ -1,4 +1,5 @@
 
+import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
     scaffoldMessengerKey: _messangerKey,
+    debugShowCheckedModeBanner: false,
       title: 'Amazon Clone',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariable.backgroundColor,
@@ -59,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       //   const BottomBar()
       //   :const AdminScreen():
       // const AuthScreen(),
-      home:const  AdminScreen(),
+      home:const  BottomBar(),
     );
   }
 }
