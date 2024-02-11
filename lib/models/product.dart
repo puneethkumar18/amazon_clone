@@ -11,38 +11,37 @@ class Product {
   final List<String> images;
   final String? id;
   final String? userId;
-  final List<Rating>? rating; 
-  Product({
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.quantity,
-    required this.category,
-    required this.images,
-    this.id,
-    this.userId,
-    this.rating
-  });
+  final List<Rating>? rating;
+  Product(
+      {required this.name,
+      required this.description,
+      required this.price,
+      required this.quantity,
+      required this.category,
+      required this.images,
+      this.id,
+      this.userId,
+      this.rating});
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'name': name});
     result.addAll({'description': description});
     result.addAll({'price': price});
     result.addAll({'quantity': quantity});
     result.addAll({'category': category});
     result.addAll({'images': images});
-    if(id != null){
+    if (id != null) {
       result.addAll({'id': id});
     }
-    if(userId != null){
+    if (userId != null) {
       result.addAll({'userId': userId});
     }
     if (rating != null) {
       result.addAll({'rating': rating});
     }
-  
+
     return result;
   }
 
@@ -56,12 +55,18 @@ class Product {
       images: List<String>.from(map['images']),
       id: map['_id'],
       userId: map['userId'],
-      rating: map['rating'],
-
+      rating: map['rating'] != null
+          ? List<Rating>.from(
+              map['rating']?.map(
+                (x) => Rating.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) => Product.fromMap(json.decode(source));
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source));
 }
