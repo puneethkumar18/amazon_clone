@@ -2,6 +2,7 @@ const express = require("express");
 const http  = require("http");
 const adminRouter = require('./routes/admin');
 const authRouter  = require('./routes/auth');
+const userRouter = require('./routes/user')
 const productRouter  = require('./routes/product');
 const mongoose = require("mongoose");
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 mongoose
 .connect(DB)

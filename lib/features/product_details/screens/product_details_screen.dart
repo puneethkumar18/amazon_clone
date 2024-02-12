@@ -32,27 +32,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   double avgRating = 0;
   double myRating = 0;
 
-      @override
+  @override
   void initState() {
     super.initState();
     double totalRating = 0;
-    for(int i=0 ; i<widget.product.rating!.length ; i++){
+    for (int i = 0; i < widget.product.rating!.length; i++) {
       totalRating += widget.product.rating![i].rating;
-      if(widget.product.rating![i].userId == 
-      Provider.of<UserProvider>(context).user){
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context).user) {
         myRating = widget.product.rating![i].rating;
       }
     }
-    if(totalRating != 0){
-      avgRating = totalRating/widget.product.rating!.length;
-    } 
- }
+    if (totalRating != 0) {
+      avgRating = totalRating / widget.product.rating!.length;
+    }
+  }
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
       SearchScreen.routeName,
       arguments: query,
+    );
+  }
+
+  void addToCart() async {
+    productDetailsServices.addToCart(
+      context: context,
+      product: widget.product,
     );
   }
 
@@ -141,7 +148,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Text(
                     widget.product.id!,
                   ),
-                   Stars(rating: avgRating),
+                  Stars(rating: avgRating),
                 ],
               ),
             ),
@@ -220,7 +227,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               child: CustomButton(
                 text: 'Add to Cart',
-                onTap: () {},
+                onTap: addToCart,
                 color: const Color.fromRGBO(254, 216, 19, 1),
               ),
             ),
