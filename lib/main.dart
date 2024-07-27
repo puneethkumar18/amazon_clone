@@ -1,22 +1,9 @@
-
-import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
-import 'package:amazon_clone/features/auth/services/auth_services.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
-import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 
 void main() {
-  runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (context) => UserProvider(),
-        ),
-      ]
-      ,child: const MyApp()));
-  }
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -26,41 +13,30 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AuthServices authServices = AuthServices();
-  final _messangerKey = GlobalKey<ScaffoldMessengerState>();
-  @override
-  void initState() {
-    super.initState();
-    authServices.getUserData(context: context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    scaffoldMessengerKey: _messangerKey,
-    debugShowCheckedModeBanner: false,
-      title: 'Amazon Clone',
+      title: "Amzon Clone",
       theme: ThemeData(
-        scaffoldBackgroundColor: GlobalVariable.backgroundColor,
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         colorScheme: const ColorScheme.light(
-          primary: GlobalVariable.secondaryColor,
+          primary: GlobalVariables.secondaryColor,
         ),
         appBarTheme: const AppBarTheme(
           elevation: 0,
-          iconTheme: IconThemeData(
-            color: Colors.black
-            ),
+          iconTheme: IconThemeData(color: Colors.black),
         ),
-        useMaterial3: false,
       ),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      //  home: Provider.of<UserProvider>(context).user.token.isNotEmpty ?
-      //   Provider.of<UserProvider>(context).user.type == 'user'? 
-      //   const BottomBar()
-      //   :const AdminScreen():
-      // const AuthScreen(),
-      home:const  BottomBar(),
+      home: Scaffold(
+        body: Column(
+          children: [
+            const Center(
+              child: Text("Amzon Clone"),
+            ),
+            ElevatedButton(onPressed: () {}, child: const Text("Click"))
+          ],
+        ),
+      ),
     );
   }
 }
-
