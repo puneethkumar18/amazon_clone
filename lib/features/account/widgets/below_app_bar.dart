@@ -10,6 +10,7 @@ class BelowAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
     return Container(
+      width: MediaQuery.sizeOf(context).width,
       decoration: const BoxDecoration(
         gradient: GlobalVariables.appBarGradient,
       ),
@@ -33,6 +34,7 @@ class BelowAppBar extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 22,
                     color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
