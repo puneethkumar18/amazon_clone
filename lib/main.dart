@@ -1,4 +1,6 @@
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
+import 'package:amazon_clone/route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,19 +26,13 @@ class _MyAppState extends State<MyApp> {
         ),
         appBarTheme: const AppBarTheme(
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
         ),
       ),
-      home: Scaffold(
-        body: Column(
-          children: [
-            const Center(
-              child: Text("Amzon Clone"),
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text("Click"))
-          ],
-        ),
-      ),
+      onGenerateRoute: (settings) => generateRoutes(settings),
+      home: const AuthScreen(),
     );
   }
 }
