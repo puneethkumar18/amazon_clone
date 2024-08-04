@@ -1,6 +1,7 @@
 // IMPORT FROM PACKAGES
-const express = require("express");
+
 const mongoose = require("mongoose");
+const express = require("express");
 
 // IMPORT FROM OTHER FILES
 const authRouter = require("./routes/auth");

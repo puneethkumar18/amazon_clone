@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SingleProduct extends StatelessWidget {
-  const SingleProduct({super.key});
+  final String productUrl;
+  const SingleProduct({
+    super.key,
+    required this.productUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,11 @@ class SingleProduct extends StatelessWidget {
         child: Container(
           width: 180,
           padding: const EdgeInsets.all(10),
-          child: Image.network(''),
+          child: Image.network(
+            productUrl,
+            fit: BoxFit.fitHeight,
+            width: 180,
+          ),
         ),
       ),
     );

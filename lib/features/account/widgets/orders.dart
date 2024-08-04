@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/account/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -10,7 +11,11 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   // List of Products
-  List list = <String>[''];
+  List list = <String>[
+    'https://plus.unsplash.com/premium_photo-1693221848619-5cda3e687a62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    'https://plus.unsplash.com/premium_photo-1693221848619-5cda3e687a62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    'https://plus.unsplash.com/premium_photo-1693221848619-5cda3e687a62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +53,9 @@ class _OrdersState extends State<Orders> {
             scrollDirection: Axis.horizontal,
             itemCount: list.length,
             itemBuilder: (context, index) {
-              return Text('');
+              return SingleProduct(
+                productUrl: list[index],
+              );
             },
           ),
         )
