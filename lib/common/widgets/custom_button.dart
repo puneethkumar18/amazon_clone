@@ -1,13 +1,14 @@
-import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
+  final Color? buttonColor;
   const CustomButton({
     super.key,
     required this.text,
     required this.onTap,
+    this.buttonColor,
   });
 
   @override
@@ -15,11 +16,14 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        foregroundColor: GlobalVariables.secondaryColor,
+        foregroundColor: buttonColor,
         minimumSize: const Size(double.infinity, 50),
       ),
       child: Text(
         text,
+        style: TextStyle(
+          color: buttonColor == null ? Colors.white : Colors.black,
+        ),
       ),
     );
   }

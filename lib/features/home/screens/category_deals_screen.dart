@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/home/services/home_services.dart';
+import 'package:amazon_clone/features/product_deatils/screens/product_details_screen.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,14 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
       category: widget.category,
     );
     setState(() {});
+  }
+
+  navigateToProductDetailsScreen(Product product) {
+    Navigator.pushNamed(
+      context,
+      ProductDetailsScreen.routeName,
+      arguments: product,
+    );
   }
 
   @override
@@ -82,40 +91,43 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     ),
                     itemBuilder: (context, index) {
                       final product = categoryProducts![index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 130,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 0.5,
+                      return GestureDetector(
+                        onTap: () => navigateToProductDetailsScreen(product),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(
+                                    product.imageUrls[0],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.network(
-                                  product.imageUrls[0],
-                                  fit: BoxFit.cover,
-                                ),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.only(
+                                left: 0,
+                                top: 5,
+                                right: 15,
+                              ),
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            padding: const EdgeInsets.only(
-                              left: 0,
-                              top: 5,
-                              right: 15,
-                            ),
-                            child: Text(
-                              product.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),
