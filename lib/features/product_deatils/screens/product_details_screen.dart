@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/stars.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/home/services/home_services.dart';
 import 'package:amazon_clone/features/product_deatils/services/product_details_services.dart';
 import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:amazon_clone/models/product.dart';
@@ -23,8 +24,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final ProductDetailsServices productDetailsServices =
-      ProductDetailsServices();
+  final productDetailsServices = ProductDetailsServices();
 
   double avgRating = 0;
   double myRating = 0;
@@ -59,6 +59,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       product: widget.product,
       context: context,
       rating: rating,
+    );
+  }
+
+  void addToCart() {
+    productDetailsServices.addToCart(
+      product: widget.product,
+      context: context,
     );
   }
 
@@ -224,7 +231,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: CustomButton(
                 text: 'Add to Cart',
                 buttonColor: const Color.fromRGBO(254, 216, 19, 1),
-                onTap: () {},
+                onTap: addToCart,
               ),
             ),
             const SizedBox(

@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 const express = require("express");
 
 // IMPORT FROM OTHER FILES
-const authRouter = require("./routes/auth");
+const { authRouter } = require("./routes/auth");
 const adminRouter = require("./routes/admin");
 const productRouter = require("./routes/product");
+const userRouter = require("./routes/user");
 
 //CONSTANTS
 const mongooseUrl =
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 //CONNECTIONS
 mongoose
