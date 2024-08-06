@@ -14,7 +14,7 @@ const mongooseUrl =
   "mongodb+srv://puneeth:Puni%40123@cluster0.bjcikza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // INIT
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 //MIDDLEWARE
