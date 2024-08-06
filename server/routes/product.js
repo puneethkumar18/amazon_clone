@@ -1,6 +1,7 @@
 const express = require("express");
 const { Product } = require("../models/product");
 const productRouter = express.Router();
+const auth = require("../middlewares/auth");
 
 //get category Product
 productRouter.get("/api/get-CategoryProduct", auth, async (req, res) => {
