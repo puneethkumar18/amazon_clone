@@ -91,40 +91,44 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               if (_auth == Auth.singUp)
-                Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        controller: _namecontroller,
-                        text: "Name",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        controller: _emailcontroller,
-                        text: "Email",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        controller: _passwordcontroller,
-                        text: "Password",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomButton(
-                        text: 'Sign Up',
-                        onTap: () {
-                          if (_signUpFormKey.currentState!.validate()) {
-                            signUpUser();
-                          }
-                        },
-                      ),
-                    ],
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signUpFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          controller: _namecontroller,
+                          text: "Name",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          controller: _emailcontroller,
+                          text: "Email",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          controller: _passwordcontroller,
+                          text: "Password",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                          text: 'Sign Up',
+                          onTap: () {
+                            if (_signUpFormKey.currentState!.validate()) {
+                              signUpUser();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ListTile(
@@ -148,29 +152,33 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               if (_auth == Auth.signIn)
-                Form(
-                  key: _signInFormKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        controller: _emailcontroller,
-                        text: "Email",
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _passwordcontroller,
-                        text: "Password",
-                      ),
-                      const SizedBox(height: 10),
-                      CustomButton(
-                        text: 'SignIn',
-                        onTap: () {
-                          if (_signInFormKey.currentState!.validate()) {
-                            signInUser();
-                          }
-                        },
-                      )
-                    ],
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signInFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          controller: _emailcontroller,
+                          text: "Email",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _passwordcontroller,
+                          text: "Password",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomButton(
+                          text: 'SignIn',
+                          onTap: () {
+                            if (_signInFormKey.currentState!.validate()) {
+                              signInUser();
+                            }
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
             ],

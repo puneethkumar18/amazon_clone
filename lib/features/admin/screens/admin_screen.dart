@@ -1,7 +1,6 @@
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/admin/screens/products_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin-screen';

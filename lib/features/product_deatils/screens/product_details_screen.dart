@@ -1,7 +1,6 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/stars.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
 import 'package:amazon_clone/features/product_deatils/services/product_details_services.dart';
 import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:amazon_clone/models/product.dart';
